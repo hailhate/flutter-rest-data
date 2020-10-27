@@ -1,0 +1,26 @@
+name: example
+description: Exampe
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_rest_data:
+    path: ../
+  hive: ^1.4.4+1
+  hive_flutter:
+    git:
+      url: git://github.com/hivedb/hive.git
+      path: hive_flutter
+  cupertino_icons: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  strict_analyzer: ^0.4.0
+
+flutter:
+  uses-material-design: true
