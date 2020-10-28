@@ -4,13 +4,12 @@ A new Flutter application.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is an Example for flutter_rest_data.
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- A number of dependencies rely on code generation using [build_runner](https://pub.dev/packages/build_runner). In order for the project to compile successfully, you must run the build runner tool:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+$ flutter packages pub run build_runner build --delete-conflicting-outputs
+```
