@@ -11,22 +11,24 @@ class LoadErrorWidget extends StatelessWidget {
   const LoadErrorWidget({Key key, this.error}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          BeerErrorWidget(
-            errorMessage: error.beerError.map(
-              unexpected: (e) => 'Unexpected: ${e.error}',
-              missingNetwork: (_) => 'Network Connection is missing',
-              insufficientPermissions: (_) =>
-                  'Check Network Permissions, Please',
+  Widget build(BuildContext context) => Center(
+        child: Column(
+          children: [
+            BeerErrorWidget(
+              errorMessage: error.beerError.map(
+                unexpected: (e) => 'Unexpected: ${e.error}',
+                missingNetwork: (_) => 'Network Connection is missing',
+                insufficientPermissions: (_) =>
+                    'Check Network Permissions, Please',
+              ),
             ),
-          ),
-          RaisedButton(
-            onPressed: () => BlocProvider.of<HomeBloc>(context).add(
-              const HomeEvent.load(),
-            ),
-            child: const Text('Retry'),
-          )
-        ],
+            RaisedButton(
+              onPressed: () => BlocProvider.of<HomeBloc>(context).add(
+                const HomeEvent.load(),
+              ),
+              child: const Text('Retry'),
+            )
+          ],
+        ),
       );
 }

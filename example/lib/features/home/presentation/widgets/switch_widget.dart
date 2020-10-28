@@ -13,10 +13,7 @@ class SwitchWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 4.0, top: 12.0, bottom: 4.0),
-      child: Row(
+  Widget build(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Flexible(
@@ -32,7 +29,5 @@ class SwitchWidget extends StatelessWidget {
             onChanged: onChanged,
           ),
         ],
-      ),
-    );
-  }
+      );
 }

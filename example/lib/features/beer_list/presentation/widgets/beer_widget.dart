@@ -4,12 +4,13 @@ import '../../../../models/beer.dart';
 
 class BeerWidget extends StatelessWidget {
   final Beer beer;
+  final VoidCallback onTap;
 
-  const BeerWidget({Key key, this.beer}) : super(key: key);
+  const BeerWidget({Key key, this.beer, this.onTap}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.all(8.0),
+  Widget build(BuildContext context) => InkWell(
+        onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

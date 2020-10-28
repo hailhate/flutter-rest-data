@@ -2,12 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../common/widgets/load_in_progress_widget.dart';
+import '../../../models/beer.dart';
+import '../../beer_list/presentation/beer_list_page.dart';
+import '../bloc/beers_state.dart';
 import '../bloc/home.dart';
-import '../presentation/widgets/beer_widget.dart';
 import '../presentation/widgets/load_error_widget.dart';
 import '../presentation/widgets/switch_widget.dart';
+import 'widgets/load_beers_button.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,34 +37,42 @@ class HomePage extends StatelessWidget {
                 },
               ),
             ),
-            BlocBuilder<HomeBloc, HomeState>(
-              buildWhen: (p, c) => p.beerState != c.beerState,
-              builder: (context, state) => state.beerState.map(
-                initial: (_) => RaisedButton(
-                  onPressed: () => BlocProvider.of<HomeBloc>(context).add(
-                    const HomeEvent.load(),
+            Expanded(
+              child: Center(
+                child: BlocConsumer<HomeBloc, HomeState>(
+                  listenWhen: (p, c) => p.beerState != c.beerState,
+                  listener: (context, state) {
+                    state.beerState.maybeWhen(
+                      loadedSuccess: (loadSuccess) {
+                        final List<Beer> beers =
+                            (state.beerState as LoadSuccess).beers;
+                        _openBeerListPage(context, beers);
+                      },
+                      orElse: () {},
+                    );
+                  },
+                  buildWhen: (p, c) => p.beerState != c.beerState,
+                  builder: (context, state) => AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 150),
+                    child: state.beerState.map(
+                      initial: (_) => const LoadBeersButton(),
+                      loadInProgress: (_) => const LoadInProgressWidget(),
+                      loadedSuccess: (loadSuccess) => const LoadBeersButton(),
+                      loadFailure: (error) => LoadErrorWidget(error: error),
+                    ),
                   ),
-                  child: const Text('Load Beers'),
                 ),
-                loadInProgress: (_) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                loadedSuccess: (loadSuccess) => ListView.separated(
-                  itemCount: loadSuccess.beers.length,
-                  itemBuilder: (context, index) => BeerWidget(
-                    beer: loadSuccess.beers[index],
-                  ),
-                  separatorBuilder: (context, index) => Container(
-                    height: 1,
-                    color: Colors.grey.shade500,
-                  ),
-                ),
-                loadFailure: (error) => LoadErrorWidget(error: error),
               ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  void _openBeerListPage(BuildContext context, List<Beer> beers) {
+    Navigator.of(context).push<BeerListPage>(
+      MaterialPageRoute(builder: (context) => BeerListPage(beers: beers)),
     );
   }
 }
