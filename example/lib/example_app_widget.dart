@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'features/home/presentation/home_page.dart';
+
 class ExampleAppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -8,12 +10,7 @@ class ExampleAppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Beers API Client'),
-        ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.center),
-      ),
+      home: HomePage(),
     );
   }
 }

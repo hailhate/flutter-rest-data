@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'dependencies.dart';
 import 'example_app_widget.dart';
 
-void main() {
+Future<void> main() async {
+  configureDependencies();
   runApp(ExampleAppWidget());
 }
