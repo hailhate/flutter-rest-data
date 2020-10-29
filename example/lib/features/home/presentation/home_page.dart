@@ -58,7 +58,9 @@ class HomePage extends StatelessWidget {
                       initial: (_) => const LoadBeersButton(),
                       loadInProgress: (_) => const LoadInProgressWidget(),
                       loadedSuccess: (loadSuccess) => const LoadBeersButton(),
-                      loadFailure: (error) => LoadErrorWidget(error: error),
+                      loadFailure: (error) => LoadErrorWidget(
+                        error: error.beerError,
+                      ),
                     ),
                   ),
                 ),

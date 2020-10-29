@@ -1,3 +1,4 @@
+import 'package:example/features/beer_details/presentation/beer_details_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../../models/beer.dart';
@@ -17,7 +18,7 @@ class BeerListPage extends StatelessWidget {
           itemCount: beers.length,
           itemBuilder: (context, index) => BeerWidget(
             beer: beers[index],
-            onTap: () => _openBeerDetailsPage(beers[index]),
+            onTap: () => _openBeerDetailsPage(context, beers[index]),
           ),
           separatorBuilder: (context, index) => Container(
             height: 1,
@@ -26,5 +27,9 @@ class BeerListPage extends StatelessWidget {
         ),
       );
 
-  void _openBeerDetailsPage(Beer beer) {}
+  void _openBeerDetailsPage(BuildContext context, Beer beer) {
+    Navigator.of(context).push<BeerDetailsPage>(
+      MaterialPageRoute(builder: (context) => BeerDetailsPage(beer: beer)),
+    );
+  }
 }

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../common/widgets/beer_error_widget.dart';
-import '../../bloc/beers_state.dart';
 import '../../bloc/home.dart';
+import '../../domain/beer_error.dart';
 
 class LoadErrorWidget extends StatelessWidget {
-  final LoadError error;
+  final BeerError error;
 
   const LoadErrorWidget({Key key, this.error}) : super(key: key);
 
@@ -15,7 +15,7 @@ class LoadErrorWidget extends StatelessWidget {
         child: Column(
           children: [
             BeerErrorWidget(
-              errorMessage: error.beerError.map(
+              errorMessage: error.map(
                 unexpected: (e) => 'Unexpected: ${e.error}',
                 missingNetwork: (_) => 'Network Connection is missing',
                 insufficientPermissions: (_) =>

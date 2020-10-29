@@ -1,5 +1,7 @@
 import 'package:flutter_rest_data/flutter_rest_data.dart';
 
+import 'ingredient.dart';
+
 class Beer extends JsonApiModel {
   Beer(JsonApiDocument doc) : super(doc);
   Beer.init(String type) : super.init(type);
@@ -21,4 +23,8 @@ class Beer extends JsonApiModel {
 
   String get foodPairing => attributes['food_pairing'] as String;
   set foodPairing(String value) => attributes['food_pairing'] = value;
+
+  List<Ingredient> get ingredients => includedDocs('ingredients')
+      .map((JsonApiDocument doc) => Ingredient(doc))
+      .toList();
 }
