@@ -13,6 +13,6 @@ class Ingredient extends JsonApiModel {
   String get unit => attributes['unit'] as String;
   set unit(String value) => attributes['unit'] = value;
 
-  double get qty => attributes['unit'] as double;
-  set qty(double value) => attributes['unit'] = value;
+  String get qty => attributes['qty'] as String;
+  set qty(String value) => attributes['qty'] = value;
 }

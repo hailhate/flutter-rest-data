@@ -21,8 +21,8 @@ class Beer extends JsonApiModel {
   String get alcoholByVolume => attributes['alcohol_by_volume'] as String;
   set alcoholByVolume(String value) => attributes['alcohol_by_volume'] = value;
 
-  String get foodPairing => attributes['food_pairing'] as String;
-  set foodPairing(String value) => attributes['food_pairing'] = value;
+  List<dynamic> get foodPairing => attributes['food_pairing'] as List<dynamic>;
+  set foodPairing(List<dynamic> value) => attributes['food_pairing'] = value;
 
   List<Ingredient> get ingredients => includedDocs('ingredients')
       .map((JsonApiDocument doc) => Ingredient(doc))
